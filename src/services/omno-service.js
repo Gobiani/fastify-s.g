@@ -11,7 +11,7 @@ const tokenCache = new NodeCache();
 class OmnoService {
   constructor() {
     this.baseUrl = config.omno.baseUrl;
-    this.authUrl = 'https://sso.omno.com/realms/omno/protocol/openid-connect/token';
+    this.authUrl = config.omno.authUrl;
     this.clientId = config.omno.clientId;
     this.clientSecret = config.omno.clientSecret;
     this.maxRetries = config.omno.maxRetries;

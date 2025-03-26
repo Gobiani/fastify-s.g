@@ -30,6 +30,7 @@
    OMNO_CLIENT_ID=
    OMNO_CLIENT_SECRET=
    OMNO_BASE_URL=
+   OMNO_AUTH_URL=
 
    # Webhook configuration
    WEBHOOK_BASE_URL=
@@ -40,6 +41,7 @@
    - `OMNO_CLIENT_ID`: Your Omno API client ID
    - `OMNO_CLIENT_SECRET`: Your Omno API client secret
    - `OMNO_BASE_URL`: Base URL for Omno API
+   - `OMNO_AUTH_URL`: Base URL for Omno Auth
    - `WEBHOOK_BASE_URL`: Webhook receiving URL (e.g., webhooks.site URL)
 
 4. Run the Application

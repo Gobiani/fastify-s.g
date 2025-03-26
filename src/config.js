@@ -8,6 +8,7 @@ module.exports = {
     host: process.env.HOST
   },
   omno: {
+    authUrl: process.env.OMNO_AUTH_URL,
     merchantName: process.env.OMNO_MERCHANT_NAME,
     clientId: process.env.OMNO_CLIENT_ID,
     clientSecret: process.env.OMNO_CLIENT_SECRET,
