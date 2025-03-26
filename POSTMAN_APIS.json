@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "5ad81434-fcfd-4736-b822-002bc22e1c4d",
+		"name": "Omno Payment Request Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36146275"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://sso.omno.com/realms/omno/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"sso",
+						"omno",
+						"com"
+					],
+					"path": [
+						"realms",
+						"omno",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				},
+				"description": "Obtain authentication token using client credentials grant"
+			},
+			"response": []
+		},
+		{
+			"name": "Omno H2H Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer "
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"amount\": 1000,\n  \"currency\": \"USD\",\n  \"lang\": \"en\",\n  \"hookUrl\": \"\",\n  \"callback\": \"http://localhost:3000/callback-success\",\n  \"callbackFail\": \"http://localhost:3000/callback-fail\",\n  \"billing\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"address1\": \"123 Street\",\n    \"city\": \"Cityville\",\n    \"state\": \"State\",\n    \"country\": \"US\",\n    \"postalCode\": \"12345\",\n    \"phone\": \"1234567890\",\n    \"email\": \"john.doe@example.com\",\n    \"externalUserId\": \"user123\",\n    \"dateOfBirth\": \"1980-01-01\"\n  },\n  \"orderId\": \"order123\",\n  \"cardToken\": \"token123\",\n  \"payment3dsType\": \"Redirection\",\n  \"kycVerified\": true,\n  \"previousPaymentCount\": 5,\n  \"cardData\": {\n    \"cardNumber\": \"4111111111111111\",\n    \"cardHolderName\": \"John Doe\",\n    \"cardExpiryDate\": \"12\",\n    \"cardExpiryDate2\": \"2029\",\n    \"cardCvv\": \"123\",\n    \"browser\": {\n      \"colorDepth\": 24,\n      \"userAgent\": \"Chrome/5.0\",\n      \"language\": \"en-US\",\n      \"timeZone\": \"-300\",\n      \"screenWidth\": 1920,\n      \"javaEnabled\": true,\n      \"customerIp\": \"\",\n      \"screenHeight\": 1080,\n      \"windowHeight\": 800,\n      \"timeZoneOffset\": -300,\n      \"windowWidth\": 1200\n    }\n  },\n  \"saveCard\": true,\n  \"merchantInformation\": {\n    \"name\": \"testAcc\",\n    \"merchantName\": \"testAcc\",\n    \"country\": \"US\",\n    \"address1\": \"123 Example St.\",\n    \"administrativeArea\": \"CA\",\n    \"locality\": \"Example City\",\n    \"postalCode\": \"12345\",\n    \"url\": \"https://example.com\",\n    \"customerServicePhoneNumber\": \"123-456-7890\",\n    \"categoryCode\": \"5533\",\n    \"noteToBuyer\": \"Thank you for your purchase!\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/create-transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"create-transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Webhook",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n  \"status\": \"Declined\",\r\n  \"amount\": 1000,\r\n  \"currency\": \"USD\",\r\n  \"createdAt\": \"2025-03-26 09:33:02\",\r\n  \"psp\": \"jjjj\",\r\n  \"masterPsp\": \"FakePsp\",\r\n  \"cardMask\": \"411111******1111\",\r\n  \"cardholder\": \"John Doe\",\r\n  \"expirationDate\": \"12/2029\",\r\n  \"country\": \"Poland\",\r\n  \"cardBrand\": \"VISA\",\r\n  \"customerId\": \"a5313b66-fc9f-4ece-9de5-d1cd3a66a4f3\",\r\n  \"paymentResult\": \"\",\r\n  \"initialAmount\": 1000,\r\n  \"initialCurrency\": \"USD\",\r\n  \"paymentLog\": [\r\n    {\r\n      \"amount\": 1000,\r\n      \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n      \"customerId\": \"a5313b66-fc9f-4ece-9de5-d1cd3a66a4f3\",\r\n      \"currency\": \"USD\",\r\n      \"paymentTransactionStatus\": \"Created\",\r\n      \"transactionRequestType\": \"JustPay\",\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"country\": \"United States of America\",\r\n      \"hookUrl\": \"https://webhook.site/c61083c2-711a-42d6-9302-3b19e2fe3136\",\r\n      \"callback\": \"http://localhost:3000/callback-success\",\r\n      \"lang\": \"en\",\r\n      \"initialTransaction\": false,\r\n      \"createdAt\": \"2025-03-26 09:33:02\",\r\n      \"orderId\": \"order123\",\r\n      \"initialAmount\": 1000,\r\n      \"initialCurrency\": \"USD\"\r\n    },\r\n    {\r\n      \"amount\": 1000,\r\n      \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n      \"customerId\": \"a5313b66-fc9f-4ece-9de5-d1cd3a66a4f3\",\r\n      \"currency\": \"USD\",\r\n      \"paymentTransactionStatus\": \"Declined\",\r\n      \"transactionRequestType\": \"JustPay\",\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"cardMask\": \"411111******1111\",\r\n      \"cardholder\": \"John Doe\",\r\n      \"expirationDate\": \"12/2029\",\r\n      \"cardHash\": \"9bbef19476623ca56c17da75fd57734dbf82530686043a6e491c6d71befe8f6e\",\r\n      \"country\": \"Poland\",\r\n      \"brand\": \"VISA\",\r\n      \"hookUrl\": \"https://webhook.site/c61083c2-711a-42d6-9302-3b19e2fe3136\",\r\n      \"callback\": \"http://localhost:3000/callback-success\",\r\n      \"lang\": \"en\",\r\n      \"initialTransaction\": false,\r\n      \"merchantPSPName\": \"jjjj\",\r\n      \"merchantPSPId\": \"948\",\r\n      \"createdAt\": \"2025-03-26 09:33:03\",\r\n      \"orderId\": \"order123\",\r\n      \"paymentResult\": \"\",\r\n      \"initialAmount\": 1000,\r\n      \"initialCurrency\": \"USD\"\r\n    }\r\n  ],\r\n  \"billingData\": {\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"address1\": \"123 Street\",\r\n    \"city\": \"Cityville\",\r\n    \"state\": \"State\",\r\n    \"country\": \"US\",\r\n    \"postalCode\": \"12345\",\r\n    \"phone\": \"1234567890\",\r\n    \"email\": \"john.doe@example.com\"\r\n  },\r\n  \"paymentTransactionRequests\": [],\r\n  \"paymentSystemLog\": [\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"TransactionCountByCardSuitability\",\r\n      \"logData\": {\r\n        \"result\": true,\r\n        \"cardHash\": \"9bbef19476623ca56c17da75fd57734dbf82530686043a6e491c6d71befe8f6e\",\r\n        \"pspMaxTransactionCountPerCardPerMonth\": 9999999,\r\n        \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n        \"pspMaxTransactionCountPerCardPerDay\": 9999999,\r\n        \"transactionCountByCardPerDay\": 0,\r\n        \"pspName\": \"jjjj\",\r\n        \"transactionCountByCardPerMonth\": 2\r\n      }\r\n    },\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"TransactionSumByCardSuitability\",\r\n      \"logData\": {\r\n        \"pspMaxTransactionAmountPerCardPerMonth\": 9999999,\r\n        \"result\": true,\r\n        \"transactionSumByCardPerDay\": 0,\r\n        \"cardHash\": \"9bbef19476623ca56c17da75fd57734dbf82530686043a6e491c6d71befe8f6e\",\r\n        \"pspMaxTransactionAmountPerCardPerDay\": 9999999,\r\n        \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n        \"pspName\": \"jjjj\",\r\n        \"transactionSumByCardPerMonth\": 2000\r\n      }\r\n    },\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"TransactionCountForMerchantSuitability\",\r\n      \"logData\": {\r\n        \"result\": true,\r\n        \"pspMaxTransactionCountPerDay\": 9999999,\r\n        \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n        \"pspMaxTransactionCountPerMonth\": 9999999,\r\n        \"transactionCountPerDay\": 1,\r\n        \"transactionCountPerMonth\": 7,\r\n        \"pspName\": \"jjjj\"\r\n      }\r\n    },\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"TransactionSumForMerchantSuitability\",\r\n      \"logData\": {\r\n        \"result\": true,\r\n        \"pspMaxTransactionAmountPerDay\": 9999999,\r\n        \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n        \"transactionSumPerDay\": 1000,\r\n        \"transactionSumPerMonth\": 6010.8,\r\n        \"pspName\": \"jjjj\",\r\n        \"pspMaxTransactionAmountPerMonth\": 9999999\r\n      }\r\n    },\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"PaymentAmountRangeSuitability\",\r\n      \"logData\": {\r\n        \"result\": true,\r\n        \"cardHash\": \"9bbef19476623ca56c17da75fd57734dbf82530686043a6e491c6d71befe8f6e\",\r\n        \"amount\": 1000,\r\n        \"merchantId\": \"78845621-b958-4dca-9dff-b75cda41c604\",\r\n        \"pspMaxAmount\": 99999,\r\n        \"pspName\": \"jjjj\",\r\n        \"pspMinAmount\": 0\r\n      }\r\n    },\r\n    {\r\n      \"paymentId\": \"727357D1B65E4C178AA3830047E73CC3\",\r\n      \"type\": \"PSPSuitability\",\r\n      \"logData\": {\r\n        \"result\": true,\r\n        \"isAmountWithinPspLimits\": true,\r\n        \"isPaymentProvider3DSTypeSuitable\": true,\r\n        \"isTransCountForMerchantSuitable\": true,\r\n        \"isInitialTransSupported\": true,\r\n        \"isTransSumByCardSuitable\": true,\r\n        \"isTransCountByCardSuitable\": true,\r\n        \"isTransSumForMerchantSuitable\": true,\r\n        \"isPaymentProviderKycRequiredSuitable\": true,\r\n        \"isNotUnsuccessfulPSP\": true,\r\n        \"countOfInitialTransactionsValid\": true,\r\n        \"isConstraintsMet\": true\r\n      }\r\n    }\r\n  ],\r\n  \"orderId\": \"order123\",\r\n  \"3dsRedirectUrl\": \"https://fake.omno.com/page/transaction/3ds/727357D1B65E4C178AA3830047E73CC3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/webhook",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
